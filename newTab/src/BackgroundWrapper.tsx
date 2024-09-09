@@ -13,23 +13,34 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 	const [artistName, setArtistName] = useState<string | null>(null);
 	const [photoLink, setPhotoLink] = useState<string | null>(null);
 
-	const hasOneHourPassed = (timestamp: number): boolean => {
+	const hasTimePassed = (timestamp: number): boolean => {
 		const currentTime = Date.now();
-		return currentTime - timestamp > 1800000; // every 30 minutes
+		return currentTime - timestamp > 900000; // every 15 minutes
 	};
 
 	useEffect(() => {
 		const fetchRandomPhoto = async () => {
 			try {
-				const response = await fetch(
-					`https://api.unsplash.com/photos/random?client_id=${
-						import.meta.env.VITE_UNSPLASH_ACCESS_KEY
-					}`
-				);
-				const data = await response.json();
-				const newImageUrl = data.urls.regular;
+				let isHorizontal = false;
+				let data;
+
+				while (!isHorizontal) {
+					const response = await fetch(
+						`https://api.unsplash.com/photos/random?client_id=${
+							import.meta.env.VITE_UNSPLASH_ACCESS_KEY
+						}`
+					);
+					data = await response.json();
+					// Check if the image is horizontal
+					if (data.width > data.height) {
+						isHorizontal = true;
+					}
+				}
+
+				const newImageUrl = data.urls.full;
 				const newArtistName = data.user.name;
 				const newPhotoLink = data.links.html;
+
 				// Save image data in localStorage
 				localStorage.setItem("imageUrl", newImageUrl);
 				localStorage.setItem("imageTimestamp", Date.now().toString());
@@ -55,7 +66,7 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 			savedImageTimestamp &&
 			savedArtistName &&
 			savedPhotoLink &&
-			!hasOneHourPassed(Number(savedImageTimestamp))
+			!hasTimePassed(Number(savedImageTimestamp))
 		) {
 			setImageUrl(savedImageUrl);
 			setArtistName(savedArtistName);
@@ -77,7 +88,7 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 			<div className={className}>{children}</div>
 
 			{artistName && photoLink && (
-				<div className="absolute bottom-4 left-4 bg-slate-700 bg-opacity-30 backdrop-blur-xl p-8 rounded-xl shadow-inner text-xl">
+				<div className="absolute bottom-4 left-4 bg-black bg-opacity-60 backdrop-blur-xl p-8 rounded-xl shadow-2xl text-xl">
 					<p>
 						Photo by{" "}
 						<a

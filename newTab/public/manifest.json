@@ -1,0 +1,13 @@
+{
+	"manifest_version": 3,
+	"name": "newTab: focused productivity",
+	"version": "1.0",
+	"description": "A custom new tab page built with React, focused on the time left.",
+	"permissions": ["storage"],
+	"action": {
+		"default_popup": "index.html"
+	},
+	"chrome_url_overrides": {
+		"newtab": "index.html"
+	}
+}
