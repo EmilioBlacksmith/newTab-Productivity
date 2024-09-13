@@ -56,7 +56,7 @@ export const useLifeExpectancyStore = create<LifeExpectancyState>(
 			let adjustedLifeExpectancy = state.baseLifeExpectancy;
 
 			const exerciseAdjustment = {
-				sedentary: -3,
+				sedentary: -10,
 				light: 0,
 				moderate: 1.8,
 				active: 3.4,
@@ -68,11 +68,11 @@ export const useLifeExpectancyStore = create<LifeExpectancyState>(
 			const heightInMeters = state.height / 100;
 			const bmi = state.weight / (heightInMeters * heightInMeters);
 			if (bmi < 18.5) {
-				adjustedLifeExpectancy -= 2;
+				adjustedLifeExpectancy -= 15;
 			} else if (bmi >= 25 && bmi < 30) {
-				adjustedLifeExpectancy -= 1;
+				adjustedLifeExpectancy -= 7;
 			} else if (bmi >= 30) {
-				adjustedLifeExpectancy -= 3;
+				adjustedLifeExpectancy -= 15;
 			} else {
 				adjustedLifeExpectancy += 3;
 			}
