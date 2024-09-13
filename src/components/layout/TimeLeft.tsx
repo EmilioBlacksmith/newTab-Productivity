@@ -3,22 +3,36 @@ import { useState } from "react";
 import LifeExpectancyFormModal from "../common/LifeExpectancyFormModal";
 
 export default function TimeLeft() {
-	const { bornDate } = useLifeExpectancyStore();
-	const [openBornDateModal, setOpenBornDateModal] = useState(false);
+	const { calculateLifeExpectancy, bornDate } = useLifeExpectancyStore();
+	const [openLifeExpectancyModal, setOpenLifeExpectancyModal] = useState(false);
 
-	function handleOpenBornDateModal() {
-		setOpenBornDateModal(!openBornDateModal);
+	const lifeExpectancy = calculateLifeExpectancy();
+	const birthDate = new Date(bornDate);
+	const currentDate = new Date();
+	const age = currentDate.getFullYear() - birthDate.getFullYear();
+	const yearsLeft = lifeExpectancy - age;
+
+	function handleOpenLifeExpectancyModal() {
+		setOpenLifeExpectancyModal(!openLifeExpectancyModal);
 	}
 
 	return (
-		<div>
-			<p>
-				You were born on <span>{bornDate}</span>
-			</p>
-			<button onClick={handleOpenBornDateModal}>Edit Born Date</button>
-			{openBornDateModal && (
-				<LifeExpectancyFormModal onClose={handleOpenBornDateModal} />
+		<>
+			<div className="p-8  flex flex-col gap-12">
+				<p className="font-black text-center text-8xl text-shadow-lg">
+					{yearsLeft} years left, before you die ☠
+				</p>
+				<button
+					onClick={handleOpenLifeExpectancyModal}
+					className=" "
+				>
+					Set your life expectancy data
+				</button>
+			</div>
+
+			{openLifeExpectancyModal && (
+				<LifeExpectancyFormModal onClose={handleOpenLifeExpectancyModal} />
 			)}
-		</div>
+		</>
 	);
 }

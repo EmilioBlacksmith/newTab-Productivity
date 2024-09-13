@@ -1,6 +1,5 @@
 export interface LifeExpectancyState {
 	bornDate: string;
-	exercise: number;
 	exerciseCategory:
 		| "sedentary"
 		| "light"
@@ -12,8 +11,8 @@ export interface LifeExpectancyState {
 	height: number;
 	weight: number;
 	baseLifeExpectancy: number;
+
 	setBornDate: (date: string) => void;
-	setExerciseAmount: (amount: number) => void;
 	setExerciseCategory: (
 		category:
 			| "sedentary"
