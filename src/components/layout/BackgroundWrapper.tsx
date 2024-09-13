@@ -12,10 +12,11 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
 	const [artistName, setArtistName] = useState<string | null>(null);
 	const [photoLink, setPhotoLink] = useState<string | null>(null);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const hasTimePassed = (timestamp: number): boolean => {
 		const currentTime = Date.now();
-		return currentTime - timestamp > 900000; // every 15 minutes
+		return currentTime - timestamp > 1600000; // check every 30 min
 	};
 
 	useEffect(() => {
@@ -31,7 +32,6 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 						}`
 					);
 					data = await response.json();
-					// Check if the image is horizontal
 					if (data.width > data.height) {
 						isHorizontal = true;
 					}
@@ -41,18 +41,18 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 				const newArtistName = data.user.name;
 				const newPhotoLink = data.links.html;
 
-				// Save image data in localStorage
 				localStorage.setItem("imageUrl", newImageUrl);
 				localStorage.setItem("imageTimestamp", Date.now().toString());
 				localStorage.setItem("artistName", newArtistName);
 				localStorage.setItem("photoLink", newPhotoLink);
 
-				// Update states
 				setImageUrl(newImageUrl);
 				setArtistName(newArtistName);
 				setPhotoLink(newPhotoLink);
+				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching the image:", error);
+				setLoading(false);
 			}
 		};
 
@@ -71,6 +71,7 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 			setImageUrl(savedImageUrl);
 			setArtistName(savedArtistName);
 			setPhotoLink(savedPhotoLink);
+			setLoading(false);
 		} else {
 			fetchRandomPhoto();
 		}
@@ -78,12 +79,25 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 
 	return (
 		<div className="relative w-screen h-screen">
+			{/* Background image */}
 			<div
-				className={`absolute inset-0 bg-center bg-cover -z-50`}
+				className={`absolute inset-0 bg-center bg-cover transition-opacity duration-500 ease-in-out -z-50 ${
+					loading ? "opacity-0" : "opacity-100"
+				}`}
 				style={{
 					backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
 				}}
 			></div>
+
+			{/* Fallback image while loading */}
+			{loading && (
+				<div
+					className="absolute inset-0 bg-center bg-cover transition-opacity duration-500 ease-in-out -z-50"
+					style={{
+						backgroundImage: `url(${localStorage.getItem("imageUrl")})`,
+					}}
+				></div>
+			)}
 
 			<div className={className}>{children}</div>
 

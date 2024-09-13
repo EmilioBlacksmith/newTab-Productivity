@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/common/lifeexpectancyformmodal.tsx","./src/components/layout/backgroundwrapper.tsx","./src/components/layout/timeleft.tsx","./src/hooks/uselocalstorage.tsx","./src/stores/lifeexpectancytype.ts","./src/stores/uselifeexpectancystore.ts","./src/utils/lifeexpectancycalculator.ts"],"version":"5.6.2"}
