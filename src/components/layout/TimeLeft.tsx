@@ -1,19 +1,14 @@
-import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { useState, useEffect } from "react";
-import DateForm from "../common/DateForm";
+import { useLifeExpectancyStore } from "../../stores/useLifeExpectancyStore";
+import { useState } from "react";
+import LifeExpectancyFormModal from "../common/LifeExpectancyFormModal";
 
 export default function TimeLeft() {
-	const [storedBornDate] = useLocalStorage<string>("bornDate", "0000-00-00");
+	const { bornDate } = useLifeExpectancyStore();
 	const [openBornDateModal, setOpenBornDateModal] = useState(false);
-	const [bornDate, setBornDate] = useState("0000-00-00");
 
 	function handleOpenBornDateModal() {
 		setOpenBornDateModal(!openBornDateModal);
 	}
-
-	useEffect(() => {
-		setBornDate(storedBornDate);
-	}, [storedBornDate]);
 
 	return (
 		<div>
@@ -21,7 +16,9 @@ export default function TimeLeft() {
 				You were born on <span>{bornDate}</span>
 			</p>
 			<button onClick={handleOpenBornDateModal}>Edit Born Date</button>
-			{openBornDateModal ? <DateForm /> : <></>}
+			{openBornDateModal && (
+				<LifeExpectancyFormModal onClose={handleOpenBornDateModal} />
+			)}
 		</div>
 	);
 }
