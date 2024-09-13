@@ -1,12 +1,16 @@
 import { useLifeExpectancyStore } from "../../stores/useLifeExpectancyStore";
 import { useState, useEffect } from "react";
 import LifeExpectancyFormModal from "../common/LifeExpectancyFormModal";
+import quotesData from "../../assets/quotes.json";
 
 export default function TimeLeft() {
 	const { calculateLifeExpectancy, bornDate } = useLifeExpectancyStore();
 	const [openLifeExpectancyModal, setOpenLifeExpectancyModal] = useState(false);
 	const [secondsLeft, setSecondsLeft] = useState(86400);
-	const [motivationalQuote, setMotivationalQuote] = useState("");
+	const [motivationalQuote, setMotivationalQuote] = useState({
+		quote: "",
+		author: "",
+	});
 
 	const lifeExpectancy = calculateLifeExpectancy();
 	const birthDate = new Date(bornDate);
@@ -28,16 +32,22 @@ export default function TimeLeft() {
 	}, []);
 
 	useEffect(() => {
-		const quotes = [
-			"Every second you waste is a second closer to your death. Get to work!",
-			"Your future self is watching you right now through memories. Make them proud!",
-			"You're dying with every breath. Make it count!",
-			"Time is the only resource you can't get back. Stop wasting it!",
-			"Your potential is infinite. Your time is not. Act now!",
-		];
+		const quotes = quotesData.quotes;
+
 		const interval = setInterval(() => {
-			setMotivationalQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-		}, 10000);
+			const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+			setMotivationalQuote({
+				quote: randomQuote.quote,
+				author: randomQuote.author,
+			});
+		}, 30000); // Change quote every 30 seconds
+
+		const initialQuote = quotes[Math.floor(Math.random() * quotes.length)];
+		setMotivationalQuote({
+			quote: initialQuote.quote,
+			author: initialQuote.author,
+		});
+
 		return () => clearInterval(interval);
 	}, []);
 
@@ -85,9 +95,13 @@ export default function TimeLeft() {
 						{secondsLeft} seconds until another day is lost to the void
 					</p>
 				</div>
-				<p className="text-xl font-bold text-center text-shadow-lg">
-					{motivationalQuote}
-				</p>
+
+				<div className="text-xl font-bold text-center text-shadow-lg">
+					<p className="max-w-xl mx-auto break-words">
+						"{motivationalQuote.quote}"
+					</p>
+					<p className="font-light">- {motivationalQuote.author}</p>
+				</div>
 				<button
 					onClick={handleOpenLifeExpectancyModal}
 					className=" hover:bg-red-900 text-white font-bold py-4 px-6 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105"
