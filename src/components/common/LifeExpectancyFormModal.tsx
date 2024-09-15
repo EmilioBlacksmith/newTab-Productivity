@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import {
 	FormLifeExpectancyData,
 	LifeExpectancyFormModalProps,
-} from "../../types/LifeExpectancyTypes";
+} from "../../types/LifeExpectancy.types";
 
 export default function LifeExpectancyFormModal({
 	onClose,
