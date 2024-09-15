@@ -1,24 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useLifeExpectancyStore } from "../../stores/useLifeExpectancyStore";
 import { useEffect } from "react";
-
-interface FormLifeExpectancyData {
-	bornDate: string;
-	exerciseCategory:
-		| "sedentary"
-		| "light"
-		| "moderate"
-		| "active"
-		| "very active"
-		| "extra active";
-	sex: "male" | "female";
-	height: number;
-	weight: number;
-}
-
-interface LifeExpectancyFormModalProps {
-	onClose: () => void;
-}
+import {
+	FormLifeExpectancyData,
+	LifeExpectancyFormModalProps,
+} from "../../types/LifeExpectancyTypes";
 
 export default function LifeExpectancyFormModal({
 	onClose,
