@@ -155,7 +155,7 @@ export default function LifeExpectancyFormModal({
 
 				<button
 					type="submit"
-					className="hover:shadow-md hover:shadow-black hover:bg-opacity-50 hover:backdrop-blur-sm hover:bg-teal-500 p-4 rounded-md ease-in-out transition-all mt-4"
+					className="hover:bg-teal-500 text-white font-bold py-4 px-6 rounded transition-all duration-300 ease-in-out"
 				>
 					Save Data
 				</button>

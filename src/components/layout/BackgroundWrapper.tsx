@@ -102,7 +102,7 @@ const BackgroundWrapper: React.FC<WrapperProps> = ({
 			<div className={className}>{children}</div>
 
 			{artistName && photoLink && (
-				<div className="absolute bottom-4 left-4 bg-black bg-opacity-60 backdrop-blur-xl p-8 rounded-xl shadow-2xl text-xl">
+				<div className="absolute bottom-4 left-4 text-gray-300 font-black bg-black bg-opacity-75 backdrop-blur-xl p-4 rounded-xl shadow-2xl text-sm">
 					<p>
 						Photo by{" "}
 						<a
