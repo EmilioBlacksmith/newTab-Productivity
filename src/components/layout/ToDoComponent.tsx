@@ -31,8 +31,11 @@ const ToDoComponent = () => {
 					isTaskFromYesterday(new Date(task.dateCreated))
 				)
 		);
-		setTasks(updatedTasks);
-	}, [tasks, setTasks]);
+
+		if (updatedTasks.length !== tasks.length) {
+			setTasks(updatedTasks);
+		}
+	}, []);
 
 	const createTask = (title: string) => {
 		const newTask: Task = {
