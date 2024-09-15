@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import {
 	FormLifeExpectancyData,
 	LifeExpectancyFormModalProps,
-} from "../../types/LifeExpectancyTypes";
+} from "../../types/LifeExpectancy.types";
 
 export default function LifeExpectancyFormModal({
 	onClose,
@@ -85,7 +85,7 @@ export default function LifeExpectancyFormModal({
 					<p className="text-red-500">{errors.bornDate.message}</p>
 				)}
 
-				<label>Exercise Category</label>
+				<label>Exercise Amount</label>
 				<select
 					className="text-black rounded-sm p-2 w-full"
 					{...register("exerciseCategory", {
