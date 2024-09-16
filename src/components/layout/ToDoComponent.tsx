@@ -11,16 +11,12 @@ const ToDoComponent = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
-	const isTaskFromYesterday = (dateCreated: Date) => {
+	const isOlderThanYesterday = (dateCreated: Date) => {
 		const today = new Date();
 		const yesterday = new Date(today);
 		yesterday.setDate(today.getDate() - 1);
 
-		return (
-			dateCreated.getDate() === yesterday.getDate() &&
-			dateCreated.getMonth() === yesterday.getMonth() &&
-			dateCreated.getFullYear() === yesterday.getFullYear()
-		);
+		return dateCreated < yesterday;
 	};
 
 	useEffect(() => {
@@ -28,14 +24,14 @@ const ToDoComponent = () => {
 			(task) =>
 				!(
 					task.status === "done" &&
-					isTaskFromYesterday(new Date(task.dateCreated))
+					isOlderThanYesterday(new Date(task.dateCreated))
 				)
 		);
 
 		if (updatedTasks.length !== tasks.length) {
 			setTasks(updatedTasks);
 		}
-	}, []);
+	}, [tasks, setTasks]);
 
 	const createTask = (title: string) => {
 		const newTask: Task = {
@@ -210,7 +206,7 @@ const ToDoComponent = () => {
 			)}
 			<p className="text-sm font-semibold text-gray-500">
 				*** This list gets automatically deleted if the task is done and was
-				from yesterday
+				created before yesterday
 			</p>
 		</div>
 	);
