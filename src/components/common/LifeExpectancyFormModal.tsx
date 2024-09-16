@@ -1,10 +1,11 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useLifeExpectancyStore } from "../../stores/useLifeExpectancyStore";
 import { useEffect } from "react";
 import {
 	FormLifeExpectancyData,
 	LifeExpectancyFormModalProps,
 } from "../../types/LifeExpectancy.types";
+import { CustomDropdown, CustomInput } from "../../utils/CustomInputs";
 
 export default function LifeExpectancyFormModal({
 	onClose,
@@ -22,12 +23,7 @@ export default function LifeExpectancyFormModal({
 		setWeight,
 	} = useLifeExpectancyStore();
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		reset,
-	} = useForm<FormLifeExpectancyData>({
+	const { control, handleSubmit, reset } = useForm<FormLifeExpectancyData>({
 		defaultValues: {
 			bornDate,
 			exerciseCategory,
@@ -66,82 +62,100 @@ export default function LifeExpectancyFormModal({
 		<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-md z-50">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="bg-black bg-opacity-45 p-8 rounded-xl shadow-xl w-1/2 h-2/3 max-w-4xl flex flex-col justify-between gap-4"
+				className="relative bg-black bg-opacity-45 p-8 rounded-xl shadow-xl w-1/2 h-2/3 max-w-4xl flex flex-col justify-between gap-4"
 			>
 				<h1 className="font-black text-2xl">
 					Configure Personal Data to handle your life expectancy :)
 				</h1>
-				<label>When were you born?</label>
-				<input
-					className="text-black rounded-sm p-2 w-full"
-					type="date"
-					{...register("bornDate", {
+
+				<CustomInput
+					label="When were you born?"
+					name="bornDate"
+					control={control}
+					rules={{
 						required: "Born date is required",
-						validate: (value) =>
+						validate: (value: string) =>
 							!isDateInFuture(value) || "Date cannot be in the future",
-					})}
+					}}
+					type="date"
 				/>
-				{errors.bornDate && (
-					<p className="text-red-500">{errors.bornDate.message}</p>
-				)}
 
-				<label>Exercise Amount</label>
-				<select
-					className="text-black rounded-sm p-2 w-full"
-					{...register("exerciseCategory", {
-						required: "Exercise category is required",
-					})}
-				>
-					<option value="sedentary">Sedentary: Little or not exercise</option>
-					<option value="light">Light: exercise 1/3 times/week</option>
-					<option value="moderate">Moderate: exercise 4-5 times/week</option>
-					<option value="active">
-						Active: daily exercise or intense exercise 3-4 times/week
-					</option>
-					<option value="very active">
-						Very Active: intense exercise 6-7 times/week
-					</option>
-					<option value="extra active">
-						Extra Active: very intense exercise daily, or physical job
-					</option>
-				</select>
-				{errors.exerciseCategory && (
-					<p className="text-red-500">{errors.exerciseCategory.message}</p>
-				)}
+				<Controller
+					name="exerciseCategory"
+					control={control}
+					rules={{ required: "Exercise category is required" }}
+					render={({ field }) => (
+						<CustomDropdown
+							options={[
+								{
+									value: "sedentary",
+									label: "Sedentary: Little or no exercise",
+								},
+								{ value: "light", label: "Light: exercise 1-3 times/week" },
+								{
+									value: "moderate",
+									label: "Moderate: exercise 4-5 times/week",
+								},
+								{
+									value: "active",
+									label:
+										"Active: daily exercise or intense exercise 3-4 times/week",
+								},
+								{
+									value: "very active",
+									label: "Very Active: intense exercise 6-7 times/week",
+								},
+								{
+									value: "extra active",
+									label:
+										"Extra Active: very intense exercise daily, or physical job",
+								},
+							]}
+							value={field.value}
+							onChange={field.onChange}
+							label="Exercise Amount"
+						/>
+					)}
+				/>
 
-				<label>Sex</label>
-				<select
-					className="text-black rounded-sm p-2 w-full"
-					{...register("sex", { required: "Sex is required" })}
-				>
-					<option value="male">Male</option>
-					<option value="female">Female</option>
-				</select>
-				{errors.sex && <p className="text-red-500">{errors.sex.message}</p>}
+				<Controller
+					name="sex"
+					control={control}
+					rules={{ required: "Sex is required" }}
+					render={({ field }) => (
+						<CustomDropdown
+							options={[
+								{ value: "male", label: "Male" },
+								{ value: "female", label: "Female" },
+							]}
+							value={field.value}
+							onChange={field.onChange}
+							label="Sex"
+						/>
+					)}
+				/>
 
-				<label>Height (cm)</label>
-				<input
-					className="text-black rounded-sm p-2 w-full"
+				<CustomInput
+					label="Height (cm)"
+					name="height"
+					control={control}
+					rules={{ required: "Height is required" }}
 					type="number"
-					{...register("height", { required: "Height is required" })}
+					min="0"
 				/>
-				{errors.height && (
-					<p className="text-red-500">{errors.height.message}</p>
-				)}
 
-				<label>Weight (kg)</label>
-				<input
-					className="text-black rounded-sm p-2 w-full"
+				<CustomInput
+					label="Weight (kg)"
+					name="weight"
+					control={control}
+					rules={{ required: "Weight is required" }}
 					type="number"
-					{...register("weight", { required: "Weight is required" })}
+					min="0"
 				/>
-				{errors.weight && (
-					<p className="text-red-500">{errors.weight.message}</p>
-				)}
 
 				<button
 					type="submit"
-					className="hover:bg-teal-500 text-white font-bold py-4 px-6 rounded transition-all duration-300 ease-in-out"
+					className="bg-black bg-opacity-40 bg-backdrop-blur p-4 hover:bg-teal-700 rounded transition-all duration-150 ease-in-out focus:outline-none"
 				>
 					Save Data
 				</button>
