@@ -108,8 +108,8 @@ const ToDoComponent = () => {
 	}, []);
 
 	return (
-		<div className="py-4 px-6 flex flex-col align-middle justify-center gap-4 bg-black bg-opacity-75 w-1/3 text-base rounded-lg backdrop-blur">
-			<h1 className="font-bold text-2xl">Fucking Work. (To-Do list)</h1>
+		<div className="p-2 flex flex-col align-middle justify-center gap-2 bg-black bg-opacity-75 w-1/3 text-base rounded-lg backdrop-blur">
+			<h1 className="font-bold text-xl">Fucking Work. (To-Do list)</h1>
 			<ul className="flex flex-col gap-4">
 				{tasks.map((task) => (
 					<li
@@ -149,7 +149,7 @@ const ToDoComponent = () => {
 				))}
 			</ul>
 			{isInputVisible && editTaskId !== null ? (
-				<div className="flex flex-row py-4 px-6">
+				<div className="flex flex-row p-2">
 					<input
 						ref={inputRef}
 						type="text"
@@ -191,7 +191,7 @@ const ToDoComponent = () => {
 					<button
 						ref={buttonRef}
 						onClick={handleAddTask}
-						className="w-1/4 hover:bg-teal-500 text-white font-bold py-4 px-6 rounded transition-all duration-300 ease-in-out"
+						className="w-1/4 hover:bg-teal-500 text-white font-bold p-2 rounded transition-all duration-300 ease-in-out"
 					>
 						Add Task
 					</button>
@@ -199,7 +199,7 @@ const ToDoComponent = () => {
 			) : (
 				<button
 					onClick={() => setIsInputVisible(true)}
-					className="hover:bg-teal-500 text-white font-bold py-4 px-6 rounded transition-all duration-300 ease-in-out"
+					className="hover:bg-teal-500 text-white font-bold p-2 rounded transition-all duration-300 ease-in-out"
 				>
 					Add New Task
 				</button>
