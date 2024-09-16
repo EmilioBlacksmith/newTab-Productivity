@@ -17,21 +17,40 @@ export default function TimeLeftComponent() {
 		setOpenLifeExpectancyModal(!openLifeExpectancyModal);
 	}
 
+	const hasValidData = (value: any) =>
+		value !== null && value !== undefined && !isNaN(value);
+
+	const shouldDisplayLifeExpectancy =
+		hasValidData(age) &&
+		hasValidData(yearsLeft) &&
+		hasValidData(seasonsLeft) &&
+		hasValidData(productiveYearsLeft) &&
+		hasValidData(lifeExpectancy);
+
 	return (
 		<>
 			<div className="p-4 flex flex-col align-middle justify-center gap-4 bg-black bg-opacity-75 w-1/3 text-sm rounded-lg backdrop-blur ">
-				<LifeExpectancyInfo
-					yearsLeft={yearsLeft}
-					seasonsLeft={seasonsLeft}
-					productiveYearsLeft={productiveYearsLeft}
-					age={age}
-				/>
-				<LifeBoxes
-					age={age}
-					yearsLeft={yearsLeft}
-					lifeExpectancy={lifeExpectancy}
-				/>
-				<MotivationalQuotes />
+				{shouldDisplayLifeExpectancy ? (
+					<>
+						<LifeExpectancyInfo
+							yearsLeft={yearsLeft}
+							seasonsLeft={seasonsLeft}
+							productiveYearsLeft={productiveYearsLeft}
+							age={age}
+						/>
+						<LifeBoxes
+							age={age}
+							yearsLeft={yearsLeft}
+							lifeExpectancy={lifeExpectancy}
+						/>
+						<MotivationalQuotes />
+					</>
+				) : (
+					<p className="font-black text-center text-2xl text-shadow-lg animate-pulse">
+						Are you ready to see how much time you have left?
+					</p>
+				)}
+
 				<button
 					onClick={handleOpenLifeExpectancyModal}
 					className="hover:bg-teal-500 text-white font-bold py-4 px-6 rounded transition-all duration-300 ease-in-out"
