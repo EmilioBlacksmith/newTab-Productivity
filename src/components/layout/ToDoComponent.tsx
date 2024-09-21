@@ -107,6 +107,18 @@ const ToDoComponent = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		const today = new Date().setHours(0, 0, 0, 0);
+		const updatedTasks = tasks.map((task) => {
+			const taskDate = new Date(task.dateCreated).setHours(0, 0, 0, 0);
+			if (task.status === "pending" && taskDate !== today) {
+				return { ...task, dateCreated: new Date() };
+			}
+			return task;
+		});
+		setTasks(updatedTasks);
+	}, []);
+
 	return (
 		<div className="p-2 flex flex-col align-middle justify-center gap-2 bg-black bg-opacity-75 w-1/3 text-base rounded-lg backdrop-blur">
 			<h1 className="font-bold text-xl">Fucking Work. (To-Do list)</h1>
