@@ -29,7 +29,7 @@ export default function TimeLeftComponent() {
 
 	return (
 		<>
-			<div className="p-4 flex flex-col align-middle justify-center gap-4 bg-black bg-opacity-75 w-1/3 text-sm rounded-lg backdrop-blur ">
+			<div className="p-4 flex flex-col align-middle justify-center gap-4 bg-black bg-opacity-75 w-1/2 m-8 text-sm rounded-lg backdrop-blur ">
 				{shouldDisplayLifeExpectancy ? (
 					<>
 						<LifeExpectancyInfo

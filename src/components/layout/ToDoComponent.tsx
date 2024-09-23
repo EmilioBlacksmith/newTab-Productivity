@@ -120,7 +120,7 @@ const ToDoComponent = () => {
 	}, []);
 
 	return (
-		<div className="p-2 flex flex-col align-middle justify-center gap-2 bg-black bg-opacity-75 w-1/3 text-base rounded-lg backdrop-blur">
+		<div className="p-4 flex flex-col align-middle justify-center gap-2 bg-black bg-opacity-75 w-full text-base rounded-lg backdrop-blur">
 			<h1 className="font-bold text-xl">Fucking Work. (To-Do list)</h1>
 			<ul className="flex flex-col gap-4">
 				{tasks.map((task) => (
