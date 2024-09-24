@@ -7,7 +7,7 @@ function App() {
 	return (
 		<BackgroundWrapper className="w-full h-full flex align-middle items-center justify-center flex-row gap-8">
 			<TimeLeftComponent />
-			<div className="w-1/2 flex flex-col justify-between h-1/2 m-8">
+			<div className="w-1/2 flex flex-col justify-center gap-4 h-1/2 m-8">
 				<PurposeComponent />
 				<ToDoComponent />
 			</div>
