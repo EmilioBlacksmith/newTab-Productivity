@@ -1,3 +1,5 @@
+console.clear();
+
 const fs = require("fs");
 const readline = require("readline");
 
@@ -15,7 +17,6 @@ function readEnvFile() {
 			}
 		}
 	} catch (error) {
-		// File doesn't exist or can't be read
 		return null;
 	}
 	return null;
