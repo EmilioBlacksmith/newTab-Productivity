@@ -4,8 +4,9 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"start": "vite",
-		"build": "tsc -b && vite build",
+		"dev": "vite",
+		"prebuild": "node scripts/create-env.cjs",
+		"build": " tsc -b && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview"
 	},
