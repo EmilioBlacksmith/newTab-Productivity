@@ -1,50 +1,52 @@
-# React + TypeScript + Vite
+# New Tab Productivity - Chrome Extension
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-Currently, two official plugins are available:
+New Tab is a simple chrome extension, built with the focus of centering all in one place, a place where you set your goals, your tasks and with a bit of existencialism. Due to allowing the user have a timer, this timer, will give you an approximation of how much time you have left in this earth.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+And how much time you have left of being productive, just to feel a bit the pressure.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Before we can initialize this project, make sure to download the dependencies after cloning this repository in your local machine.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+  git clone https://github.com/EmilioBlacksmith/newTab-Productivity.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+then:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+  cd /newTab-Productivity
 ```
+
+## Deployment
+
+**!!! - TO BE ABLE TO USE THIS PROJECT YOU WILL NEED TO GET AN ACCOUNT FOR UNSPLASH API.**
+
+Once you do have a unsplash account to get the unplash api access key, all you have to do, to build this project, is to:
+
+```bash
+  npm run build
+```
+
+When you run that, the terminal is going to ask you for an access key:
+
+```bash
+No existing Unsplash API access key found. Please provide one.
+
+Please enter your Unsplash API access key:
+
+```
+
+You neet to input your Unsplash API Access Key. Once you copy and paste that api key in the terminal, you will build the project, in a folder named `/dist`.
+
+Now everytime you call the npm run build, if you make any changes, it will get the .env, and you will not need to re-enter your api keys.
+
+## Enabling the Custom Extension in Chrome
+
+## Screenshots
+
+## Author
+
+- [@emilioblacksmith](https://github.com/EmilioBlacksmith)
