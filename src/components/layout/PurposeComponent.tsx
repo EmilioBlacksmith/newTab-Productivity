@@ -30,7 +30,7 @@ const PurposeComponent: React.FC = () => {
 	return (
 		<div className="p-4 flex flex-col align-middle justify-center gap-2 bg-black bg-opacity-75 w-full text-base rounded-lg backdrop-blur">
 			<h2 className="font-bold text-xl text-gray-600 text-shadow-lg">
-				Your goal in 3 years:
+				Your goal/purpose:
 			</h2>
 			{isEditing ? (
 				<form
