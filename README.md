@@ -22,9 +22,9 @@ then:
 
 ## Deployment
 
-**!!! - TO BE ABLE TO USE THIS PROJECT YOU WILL NEED TO GET AN ACCOUNT FOR UNSPLASH API.**
+**!!! - TO BE ABLE TO USE THIS PROJECT YOU WILL NEED TO GET AN ACCOUNT FOR [UNSPLASH API.](https://unsplash.com/developers)**
 
-Once you do have a unsplash account to get the unplash api access key, all you have to do, to build this project, is to:
+Once you do have a [unsplash account to get the unplash api access key](https://unsplash.com/developers), all you have to do, to build this project, is to:
 
 ```bash
   npm run build
@@ -45,7 +45,25 @@ Now everytime you call the npm run build, if you make any changes, it will get t
 
 ## Enabling the Custom Extension in Chrome
 
+To use it, inside chrome, you need to enable developer mode, in the extensions section.
+
+![developer mode toggle](https://github.com/user-attachments/assets/b3b52494-68db-420f-9b67-cde9ecfcf205)
+
+and then click on Load unpacked:
+
+![load unpacked](https://github.com/user-attachments/assets/a4e88770-700e-4ce7-98e2-4d97087cae42)
+
+there we will just select and upload the `/dist` folder:
+
+![Set dist folder](https://github.com/user-attachments/assets/893a87d7-45ac-44a1-8fd5-81c37c0678c1)
+
 ## Screenshots
+
+![SS-1](https://github.com/user-attachments/assets/0a2f443b-f73d-48c3-9423-c4747ccb58aa)
+
+![SS-2](https://github.com/user-attachments/assets/0997c1e7-e26e-4434-b926-9e2ba120957f)
+
+![SS-3](https://github.com/user-attachments/assets/7c56d170-f78b-47fa-b004-5634c5e4513c)
 
 ## Author
 
